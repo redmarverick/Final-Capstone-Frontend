@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 const Car = ({ data }) => (
   <article className='car flex flex-col md:flex-row items-center justify-start text-center bg-orange rounded-xl px-4 border-2'>
-    <div className='car-image w-45  relative flex flex-col justify-center md:w-56 md:h-56'>
+    <div className='car-image w-45 m-2 relative flex flex-col justify-center md:w-56 md:h-56'>
       {data.photo ? (
         <img
           src={data.photo}
