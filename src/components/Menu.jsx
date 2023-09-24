@@ -1,16 +1,6 @@
 import { NavLink } from "react-router-dom";
 import propTypes from "prop-types";
-
-const MenuLink = ({ to, children }) => (
-  <NavLink
-    to={to}
-    className={({ isActive }) => (isActive
-      ? "bg-[#97BF0F] text-white cursor-pointer py-4 text-xl font-semibold pl-4"
-      : "cursor-pointer py-4 text-xl font-semibold pl-4")}
-  >
-    {children}
-  </NavLink>
-);
+import MenuLink from "./MenuLink";
 
 const Menu = () => (
   <aside className='fixed top-0 bottom-0 text-left navigation hidden border-r border-gray-300 float-left py-8 w-[250px] bg-slate-100 h-screen lg:block'>
