@@ -1,10 +1,14 @@
-import PropTypes from 'prop-types';
-import Menu from '../components/Menu';
+import PropTypes from "prop-types";
+import Menu from "../components/Menu";
+import Header from "../components/Header";
+import MobileMenu from "../components/MobileMenu";
 
 const MainLayout = ({ children }) => (
   <div>
     <Menu />
-    <main className="main-section flex flex-col relative justify-center pt-8 lg:ml-[250px]">
+    <MobileMenu />
+    <main className='main-section flex flex-col relative justify-center lg:ml-[250px]'>
+      <Header />
       {children}
     </main>
   </div>
