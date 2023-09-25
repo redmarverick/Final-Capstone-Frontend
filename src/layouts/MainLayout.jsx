@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
-import Menu from "../components/Menu";
-import Header from "../components/Header";
-import MobileMenu from "../components/MobileMenu";
+import { Menu, MobileMenu } from "../components/navigation";
+import Header from "../components/auth/Header";
 
 const MainLayout = ({ children }) => (
   <div>

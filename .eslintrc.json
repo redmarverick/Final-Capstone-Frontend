@@ -22,7 +22,17 @@
     "linebreak-style": "off",
     "import/no-extraneous-dependencies": "off",
     "quotes": "off",
-    "jsx-quotes": "off"
+    "jsx-quotes": "off",
+    "jsx-a11y/label-has-associated-control": [
+      "error",
+      {
+        // Customize this rule as needed for your project
+        "labelComponents": [],
+        "labelAttributes": ["htmlFor", "for"],
+        "controlComponents": [],
+        "assert": "either" // This allows both 'htmlFor' and 'for'
+      }
+    ]
   },
   "overrides": [
     {
