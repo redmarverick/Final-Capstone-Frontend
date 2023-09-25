@@ -4,6 +4,7 @@ import NotFound from "../pages/NotFound";
 import ReservedCars from "../pages/ReservedCars";
 import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
+import HomePage from "../pages/HomePage";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
   {
     path: "*",
     element: <NotFound />,
+  },
+  {
+    path: "/home",
+    element: <HomePage />,
   },
 ]);
 
