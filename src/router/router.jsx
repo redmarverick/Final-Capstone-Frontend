@@ -4,6 +4,8 @@ import NotFound from "../pages/NotFound";
 import ReservedCars from "../pages/ReservedCars";
 import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
+import Reserve from "../pages/Reserve";
+import Details from "../pages/Details";
 
 const router = createBrowserRouter([
   {
@@ -19,8 +21,16 @@ const router = createBrowserRouter([
     element: <SignUp />,
   },
   {
+    path: "/new-reservation",
+    element: <Reserve />,
+  },
+  {
     path: "/reserved",
     element: <ReservedCars />,
+  },
+  {
+    path: "/details/:id",
+    element: <Details />,
   },
   {
     path: "*",
