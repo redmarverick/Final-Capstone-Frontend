@@ -7,6 +7,8 @@ import SignUp from "../pages/SignUp";
 import Reserve from "../pages/Reserve";
 import Details from "../pages/Details";
 import Home from "../pages/Home";
+import HomePage from "../pages/HomePage";
+
 
 const router = createBrowserRouter([
   {
@@ -40,6 +42,10 @@ const router = createBrowserRouter([
   {
     path: "*",
     element: <NotFound />,
+  },
+  {
+    path: "/home",
+    element: <HomePage />,
   },
 ]);
 
