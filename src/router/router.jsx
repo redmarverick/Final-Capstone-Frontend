@@ -9,7 +9,6 @@ import Details from "../pages/Details";
 import Home from "../pages/Home";
 import HomePage from "../pages/HomePage";
 
-
 const router = createBrowserRouter([
   {
     path: "/",
