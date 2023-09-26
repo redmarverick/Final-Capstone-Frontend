@@ -6,10 +6,15 @@ import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
 import Reserve from "../pages/Reserve";
 import Details from "../pages/Details";
+import Home from "../pages/Home";
 
 const router = createBrowserRouter([
   {
     path: "/",
+    element: <Home />,
+  },
+  {
+    path: "/cars",
     element: <App />,
   },
   {
@@ -29,7 +34,7 @@ const router = createBrowserRouter([
     element: <ReservedCars />,
   },
   {
-    path: "/details/:id",
+    path: "cars/details/:id",
     element: <Details />,
   },
   {
