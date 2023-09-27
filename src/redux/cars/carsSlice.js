@@ -7,7 +7,7 @@ const carsSlice = createSlice({
   },
   reducers: {
 
-  }
-})
+  },
+});
 
 export default carsSlice.reducer;

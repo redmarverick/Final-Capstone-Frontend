@@ -7,7 +7,7 @@ const reservationsSlice = createSlice({
   },
   reducers: {
 
-  }
-})
+  },
+});
 
 export default reservationsSlice.reducer;
