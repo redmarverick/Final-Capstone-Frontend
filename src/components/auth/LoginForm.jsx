@@ -24,7 +24,7 @@ const LoginForm = () => {
 
   return (
     <form
-      className='p-4 sm:p-24 bg-black flex flex-col justify-center items-center gap-4 bg-opacity-30 rounded-lg'
+      className='p-4 max-w-xl m-4 sm:p-24 bg-black flex flex-col justify-center items-center gap-4 bg-opacity-30 rounded-lg'
       onSubmit={handleSubmit}
     >
       <h1 className='text-4xl text-white font-ubuntu'>Login</h1>
@@ -62,14 +62,6 @@ const LoginForm = () => {
         {" "}
         <a href='/signup' className='text-[#7da60a]'>
           Sign Up
-        </a>
-      </p>
-
-      <p className='text-white'>
-        Forgot your password?
-        {" "}
-        <a href='/forgot-password' className='text-[#7da60a]'>
-          Reset Password
         </a>
       </p>
     </form>
