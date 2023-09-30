@@ -11,12 +11,12 @@ const HomePage = () => (
         <img src={logo} alt='Logo' className='h-20 w-20 mr-2' />
       </div>
       <div className='flex gap-2'>
-        <button
-          type='button'
+        <Link
+          to='/login'
           className='z-50 border border-amber-700 text-amber-700 px-4 py-2 rounded-full hover:bg-amber-700 hover:text-white cursor-pointer'
         >
           Login
-        </button>
+        </Link>
         {/* SIGNUP Button (Top Right) */}
         <button
           type='button'
