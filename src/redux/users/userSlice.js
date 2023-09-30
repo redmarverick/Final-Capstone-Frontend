@@ -50,6 +50,25 @@ export const loginUser = createAsyncThunk(
   },
 );
 
+export const logoutUser = createAsyncThunk("user/logoutUser", async () => {
+  try {
+    const response = await fetch("http://localhost:3000/logout", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Logout failed");
+    }
+
+    return null;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+});
+
 const initialState = {
   user: null,
   status: "idle",
