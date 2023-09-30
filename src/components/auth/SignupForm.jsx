@@ -1,18 +1,20 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { registerUser } from "../../redux/users/userSlice";
 
 const SignupForm = () => {
-  const userStatus = {
-    created: false,
-    message: "",
-  };
+  const dispatch = useDispatch();
+  const registrationStatus = useSelector((state) => state.user.status);
+  const registrationError = useSelector((state) => state.user.error);
 
   const [userData, setUserData] = useState({
     name: "",
     email: "",
     password: "",
-    confirmPassword: "",
+    password_confirmation: "",
   });
 
+  // eslint-disable-next-line
   const [error, setError] = useState("");
 
   const handleChange = (e) => {
@@ -22,7 +24,7 @@ const SignupForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (userData.password !== userData.confirmPassword) {
+    if (userData.password !== userData.password_confirmation) {
       setError("Passwords do not match");
     } else if (
       // eslint-disable-next-line
@@ -30,29 +32,22 @@ const SignupForm = () => {
       // eslint-disable-next-line
       userData.password === "" ||
       // eslint-disable-next-line
-      userData.confirmPassword === "" ||
-      // eslint-disable-next-line
+      userData.password_confirmation === "" ||
       userData.name === ""
     ) {
       setError("Please fill all the fields");
     } else {
-      setUserData({
-        ...userData,
-        name: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-      });
-      // dispatch(postUser(userData));
+      // Dispatch the registerUser action
+      dispatch(registerUser(userData));
     }
   };
 
   return (
     <form
-      className=' sm:p-20 bg-black flex flex-col items-center gap-2 bg-opacity-50 rounded-lg'
+      className=' sm:p-20 sm:px-32 max-w-xl bg-black flex flex-col items-center gap-2 bg-opacity-50 rounded-lg'
       onSubmit={handleSubmit}
     >
-      <h1 className='text-4xl text-white font-ubuntu'>Sign Up</h1>
+      <h1 className='text-4xl text-white font-ubuntu mb-8'>Sign Up</h1>
       <input
         className='bg-gray-100 rounded-full px-4 py-2 mt-2 focus:outline-none focus:bg-white'
         name='name'
@@ -82,33 +77,29 @@ const SignupForm = () => {
       />
       <input
         className='bg-gray-100 rounded-full px-4 py-2 mt-2 focus:outline-none focus:bg-white'
-        name='confirmPassword'
+        name='password_confirmation'
         type='password'
         id='confirmPassword'
         placeholder='Confirm Password'
         onChange={handleChange}
-        value={userData.confirmPassword}
+        value={userData.password_confirmation}
       />
       <button
         type='submit'
         className='inline-flex text-white bg-[#97BF0F] border-0 py-2 px-6 mt-8 focus:outline-none hover:bg-[#7da60a] rounded-full text-lg'
         id='signupButton'
+        disabled={registrationStatus === "loading"} // Disable the button during registration
       >
-        SIGN UP
+        {registrationStatus === "loading" ? "Signing Up..." : "SIGN UP"}
       </button>
-      {userStatus.created && (
+      {registrationStatus === "succeeded" && (
         <h2 className='w-full h-full flex justify-center items-center bg-white rounded-full'>
-          {userStatus.message}
+          Registration successful!
         </h2>
       )}
-      {error && (
+      {registrationError && (
         <h2 className='w-full h-full flex justify-center items-center bg-red-400 rounded-full'>
-          {error}
-        </h2>
-      )}
-      {!userStatus.created && (
-        <h2 className='w-full h-full flex justify-center items-center bg-red-400 rounded-full'>
-          {userStatus.message}
+          {registrationError}
         </h2>
       )}
     </form>
