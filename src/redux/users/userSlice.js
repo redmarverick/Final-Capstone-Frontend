@@ -1,16 +1,26 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
+function objectToFormData(obj) {
+  const formData = new URLSearchParams();
+  // eslint-disable-next-line
+  for (const key in obj) {
+    formData.append(`user[${key}]`, obj[key]);
+  }
+  return formData.toString();
+}
 // Define an async thunk for user registration (signup)
 export const registerUser = createAsyncThunk(
   "user/registerUser",
   async (userData) => {
     try {
+      const formData = objectToFormData(userData);
+
       const response = await fetch("http://localhost:3000/signup", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/x-www-form-urlencoded",
         },
-        body: JSON.stringify(userData),
+        body: formData,
       });
 
       if (!response.ok) {
@@ -30,12 +40,14 @@ export const loginUser = createAsyncThunk(
   "user/loginUser",
   async (credentials) => {
     try {
+      const formData = objectToFormData(credentials);
+
       const response = await fetch("http://localhost:3000/login", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/x-www-form-urlencoded",
         },
-        body: JSON.stringify(credentials),
+        body: formData,
       });
 
       if (!response.ok) {
@@ -55,7 +67,7 @@ export const logoutUser = createAsyncThunk("user/logoutUser", async () => {
     const response = await fetch("http://localhost:3000/logout", {
       method: "DELETE",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/x-www-form-urlencoded",
       },
     });
 

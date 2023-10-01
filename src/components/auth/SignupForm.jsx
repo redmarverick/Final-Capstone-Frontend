@@ -44,7 +44,7 @@ const SignupForm = () => {
 
   return (
     <form
-      className=' sm:p-20 sm:px-32 max-w-xl bg-black flex flex-col items-center gap-2 bg-opacity-50 rounded-lg'
+      className='p-4 sm:p-20 sm:px-32 max-w-xl bg-black flex flex-col items-center gap-2 bg-opacity-50 rounded-lg'
       onSubmit={handleSubmit}
     >
       <h1 className='text-4xl text-white font-ubuntu mb-8'>Sign Up</h1>
