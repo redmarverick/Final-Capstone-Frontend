@@ -6,6 +6,7 @@ const DELETE_CAR = 'redux/cars/DELETE_CAR';
 const UPDATE_CAR = 'redux/cars/UPDATE_CAR';
 const SET_FETCHED_USER = 'redux/user/SET_FETCHED_USER';
 const LOGOUT_USER = 'redux/user/LOGOUT_USER';
+const FETCH_CAR_BY_ID = 'redux/cars/FETCH_CAR_BY_ID';
 
 export default {
   FETCH_RESERVATIONS,
@@ -16,4 +17,5 @@ export default {
   UPDATE_CAR,
   SET_FETCHED_USER,
   LOGOUT_USER,
+  FETCH_CAR_BY_ID,
 };
