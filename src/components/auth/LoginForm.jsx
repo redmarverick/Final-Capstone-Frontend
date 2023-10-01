@@ -1,12 +1,11 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "../../redux/users/userSlice";
 
 const LoginForm = () => {
-  // TODO: Add redux logic here
-  // eslint-disable-next-line
-  const [userLogin, setUserLogin] = useState({
-    signed: null,
-    message: "",
-  });
+  const dispatch = useDispatch();
+  const loginStatus = useSelector((state) => state.user.status);
+  const loginError = useSelector((state) => state.user.error);
 
   const [userData, setUserData] = useState({
     email: "",
@@ -20,11 +19,12 @@ const LoginForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    dispatch(loginUser(userData)); // Dispatch the loginUser action with user data
   };
 
   return (
     <form
-      className='p-4 sm:p-24 bg-black flex flex-col justify-center items-center gap-4 bg-opacity-30 rounded-lg'
+      className='p-4 max-w-xl m-4 sm:p-24 bg-black flex flex-col justify-center items-center gap-4 bg-opacity-50 rounded-lg'
       onSubmit={handleSubmit}
     >
       <h1 className='text-4xl text-white font-ubuntu'>Login</h1>
@@ -49,30 +49,23 @@ const LoginForm = () => {
       <button
         type='submit'
         className='inline-flex text-white bg-[#97BF0F] border-0 py-2 px-6 mb-8 focus:outline-none hover:bg-[#7da60a] rounded-full text-lg'
+        disabled={loginStatus === "loading"} // Disable the button during login
       >
-        LOGIN
+        {loginStatus === "loading" ? "Logging In..." : "LOGIN"}
       </button>
-      {userLogin.signed && <p className='text-white'>{userLogin.message}</p>}
-      {userLogin.signed === false && (
-        <p className='text-white'>{userLogin.message}</p>
+      {loginStatus === "succeeded" && (
+        <p className='text-white'>Login successful!</p>
       )}
-
+      {loginError && <p className='text-white'>{loginError}</p>}
       <p className='text-white'>
-        Do not have an account?
-        {" "}
+        {/* eslint-disable-next-line  */}
+        Do not have an account?{" "}
         <a href='/signup' className='text-[#7da60a]'>
           Sign Up
-        </a>
-      </p>
-
-      <p className='text-white'>
-        Forgot your password?
-        {" "}
-        <a href='/forgot-password' className='text-[#7da60a]'>
-          Reset Password
         </a>
       </p>
     </form>
   );
 };
+
 export default LoginForm;

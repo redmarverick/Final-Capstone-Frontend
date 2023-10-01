@@ -1,8 +1,9 @@
 import LoginForm from "../components/auth/LoginForm";
+import AuthLayout from "../layouts/AuthLayout";
 
 const Login = () => (
-  <div className='absolute top-0 left-0 w-full h-full flex justify-center items-center'>
+  <AuthLayout>
     <LoginForm />
-  </div>
+  </AuthLayout>
 );
 export default Login;
