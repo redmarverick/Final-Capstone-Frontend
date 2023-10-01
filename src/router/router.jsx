@@ -7,6 +7,9 @@ import SignUp from "../pages/SignUp";
 import Reserve from "../pages/Reserve";
 import Details from "../pages/Details";
 import HomePage from "../pages/HomePage";
+import CarsToReserve from "../pages/CarsToReserve";
+import AddCarForm from "../pages/AddCarForm";
+import DeleteCar from "../pages/DeleteCar";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +43,23 @@ const router = createBrowserRouter([
   {
     path: "*",
     element: <NotFound />,
+  },
+
+  {
+    path: "/home",
+    element: <HomePage />,
+  },
+  {
+    path: "/car-to-reserve",
+    element: <CarsToReserve />,
+  },
+  {
+    path: "/new-car",
+    element: <AddCarForm />,
+  },
+  {
+    path: "/delete-car",
+    element: <DeleteCar />,
   },
 ]);
 
