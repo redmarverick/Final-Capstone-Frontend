@@ -6,7 +6,7 @@ const MainLayout = ({ children }) => (
   <div>
     <Menu />
     <MobileMenu />
-    <main className='main-section flex flex-col relative justify-center lg:ml-[250px]'>
+    <main className=' main-section flex flex-col relative justify-center lg:ml-[250px]'>
       <Header />
       {children}
     </main>
