@@ -1,8 +1,9 @@
 import SignupForm from "../components/auth/SignupForm";
+import AuthLayout from "../layouts/AuthLayout";
 
 const SignUp = () => (
-  <div className='absolute top-0 left-0 w-full h-full flex justify-center items-center'>
+  <AuthLayout>
     <SignupForm />
-  </div>
+  </AuthLayout>
 );
 export default SignUp;

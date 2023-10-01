@@ -6,7 +6,6 @@ import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
 import Reserve from "../pages/Reserve";
 import Details from "../pages/Details";
-import Home from "../pages/Home";
 import HomePage from "../pages/HomePage";
 import CarsToReserve from "../pages/CarsToReserve";
 import AddCarForm from "../pages/AddCarForm";
@@ -15,7 +14,7 @@ import DeleteCar from "../pages/DeleteCar";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: <HomePage />,
   },
   {
     path: "/cars",
@@ -45,6 +44,7 @@ const router = createBrowserRouter([
     path: "*",
     element: <NotFound />,
   },
+
   {
     path: "/home",
     element: <HomePage />,
