@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../redux/users/userSlice";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const loginStatus = useSelector((state) => state.user.status);
   const loginError = useSelector((state) => state.user.error);
 
@@ -19,7 +21,11 @@ const LoginForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(loginUser(userData)); // Dispatch the loginUser action with user data
+    dispatch(loginUser(userData)).then((result) => {
+      if (result.payload) {
+        navigate("/cars");
+      }
+    });
   };
 
   return (
@@ -53,10 +59,12 @@ const LoginForm = () => {
       >
         {loginStatus === "loading" ? "Logging In..." : "LOGIN"}
       </button>
+
       {loginStatus === "succeeded" && (
         <p className='text-white'>Login successful!</p>
       )}
       {loginError && <p className='text-white'>{loginError}</p>}
+
       <p className='text-white'>
         {/* eslint-disable-next-line  */}
         Do not have an account?{" "}
