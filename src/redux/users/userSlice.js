@@ -51,7 +51,7 @@ export const loginUser = createAsyncThunk(
       });
 
       if (!response.ok) {
-        throw new Error("Login failed"); // Adjust this error message as needed
+        throw new Error("Login failed, please check your credentials");
       }
 
       const data = await response.json();
@@ -114,6 +114,9 @@ const userSlice = createSlice({
       .addCase(loginUser.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
+      })
+      .addCase(logoutUser.fulfilled, (state) => {
+        state.user = null;
       });
   },
 });

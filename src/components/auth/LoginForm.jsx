@@ -14,6 +14,8 @@ const LoginForm = () => {
     password: "",
   });
 
+  const [errorMessageVisible, setErrorMessageVisible] = useState(false);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUserData({ ...userData, [name]: value });
@@ -24,6 +26,11 @@ const LoginForm = () => {
     dispatch(loginUser(userData)).then((result) => {
       if (result.payload) {
         navigate("/cars");
+      } else {
+        setErrorMessageVisible(true);
+        setTimeout(() => {
+          setErrorMessageVisible(false);
+        }, 3000);
       }
     });
   };
@@ -59,11 +66,9 @@ const LoginForm = () => {
       >
         {loginStatus === "loading" ? "Logging In..." : "LOGIN"}
       </button>
-
-      {loginStatus === "succeeded" && (
-        <p className='text-white'>Login successful!</p>
+      {errorMessageVisible && loginError && (
+        <p className='text-red-500'>{loginError}</p>
       )}
-      {loginError && <p className='text-white'>{loginError}</p>}
 
       <p className='text-white'>
         {/* eslint-disable-next-line  */}
