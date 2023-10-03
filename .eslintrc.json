@@ -23,6 +23,8 @@
     "import/no-extraneous-dependencies": "off",
     "quotes": "off",
     "jsx-quotes": "off",
+    "comma-dangle": "off",
+
     "jsx-a11y/label-has-associated-control": [
       "error",
       {
