@@ -16,29 +16,25 @@ const Details = () => {
     dispatch(fetchCarById(id));
   }, [dispatch, id]);
 
-  if (!car || carById.status === 'loading') {
+  if (!car || carById.status === "loading") {
     return <div>Loading...</div>;
   }
 
-  if (carById.status === 'error') {
+  if (carById.status === "error") {
     return <div>Error loading car details</div>;
   }
 
   const handleReserve = (carObject) => {
     sessionStorage.setItem("id", id);
-    navigate(
-      '/new-reservation',
-      {
-        state: {
-          car: carObject,
-        },
+    navigate("/new-reservation", {
+      state: {
+        car: carObject,
       },
-    );
+    });
   };
 
-  const {
-    name, photo, description, price,
-  } = car;
+  // eslint-disable-next-line
+  const { name, photo, description, price } = car;
 
   return (
     <MainLayout>
@@ -46,19 +42,14 @@ const Details = () => {
         to='/cars'
         type='button'
         className='hidden w-18 md:flex absolute  md:bottom-40 justify-between items-center mt-16 text-center text-white bg-[#96BF0E] border-0 py-2 px-4 focus:outline-none hover:bg-[#7da60a] rounded-r-full text-lg'
-        onClick={handleReserve}
       >
         <img src='/triarrow.svg' alt='calendar' className='w-8 rotate-180' />
       </Link>
-      <div className='flex flex-col items-center justify-center min-h-[94vh] md:flex-row'>
-        <div className='mx-auto flex-nowrap w-72 h-72 relative flex flex-col justify-center md:w-[45%] md:h-[45%]'>
-          <img
-            src={photo}
-            alt={name}
-            className='z-10 rounded-full md:mb-20'
-          />
+      <div className='flex flex-col md:items-start items-center justify-center min-h-[94vh] md:flex-row'>
+        <div className='mx-auto md:mt-20 flex-nowrap w-72 h-72 relative flex flex-col justify-center md:w-[45%] md:h-[45%]'>
+          <img src={photo} alt={name} className='z-10 rounded-full md:mb-20' />
         </div>
-        <div className='mb-20 md:mb-48 text-gray-700 mx-2 flex flex-col w-72 gap-4 justify-start md:mr-8 md:w-80 max-h-[100%] overfolw-scroll'>
+        <div className='mb-20 md:mt-20  text-gray-700 mx-2 flex flex-col w-72 gap-4 justify-start md:mr-8 md:w-80 max-h-[100%] overfolw-scroll'>
           <h1 className='md:text-right name text-xl font-semibold md:text-2xl md:font-bold lg:text-4xl'>
             {name}
           </h1>
