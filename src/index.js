@@ -10,10 +10,7 @@ import { loginUser } from "./redux/users/userSlice";
 const storedUser = localStorage.getItem("user");
 
 if (storedUser) {
-  // Parse the stored user data
   const user = JSON.parse(storedUser);
-
-  // Dispatch loginUser with the stored user data
   store.dispatch(loginUser.fulfilled({ user }));
 }
 
