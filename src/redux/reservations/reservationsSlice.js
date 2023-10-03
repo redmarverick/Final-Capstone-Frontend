@@ -15,15 +15,23 @@ export const reserveCar = createAsyncThunk(types.RESERVE_CAR, async (car) => {
 
 export const fetchAllReservations = createAsyncThunk(
   types.FETCH_RESERVATIONS,
-  async () => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    const response = await axios.get(url, {
-      params: {
-        user_id: user.id,
-      },
-    });
-    return response.data;
-  },
+  async (_, { getState }) => {
+    // eslint-disable-next-line
+    const user = getState().user.user;
+    // eslint-disable-next-line
+    try {
+      const response = await axios.get(url, {
+        params: {
+          user_id: user.id,
+        },
+      });
+
+      return response.data;
+    } catch (error) {
+      // Manejar errores aquí si es necesario
+      throw error;
+    }
+  }
 );
 
 // initial state for the redux slice
