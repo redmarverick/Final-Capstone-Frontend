@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
+import logo from "../../assets/images/logo.png";
 
 const MobileMenu = () => {
   const [showMenu, setShowMenu] = useState(false);
   const location = useLocation();
 
   return (
-    <div className='mobile-menu lg:hidden'>
+    <div className='mobile-menu lg:hidden z-50'>
       <button
         type='button'
         className='menu-btn absolute top-4 left-4 text-xl z-30'
@@ -23,8 +24,10 @@ const MobileMenu = () => {
           >
             <img src='/xhamb.svg' alt='logo' className='w-10' />
           </button>
-          <NavLink to='/'>Logo</NavLink>
-          <ul className='flex items-stretch text-center flex-col mt-16 px-4'>
+          <NavLink to='/' className='flex items-center justify-center'>
+            <img src={logo} alt='logo' className='w-[150px] ml-4' />
+          </NavLink>
+          <ul className='flex items-stretch text-center flex-col px-4'>
             <NavLink to='/cars'>
               <li className='cursor-pointer py-4 text-xl font-semibold'>
                 CARS
@@ -36,7 +39,7 @@ const MobileMenu = () => {
               </li>
             </NavLink>
             <NavLink
-              to='/new-reservation'
+              to='/car-to-reserve'
               onClick={() => sessionStorage.removeItem("id")}
             >
               <li className='cursor-pointer py-4 text-xl font-semibold'>
