@@ -1,22 +1,78 @@
-import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import MainLayout from "../layouts/MainLayout";
+import { reserveCar } from "../redux/reservations/reservationsSlice";
 
 const Reserve = () => {
+  const dispatch = useDispatch();
   const [bookingDate, setBookingDate] = useState("");
   const [desiredCity, setDesiredCity] = useState("");
+  const [dateError, setDateError] = useState("");
+  const [cityError, setCityError] = useState("");
+  const userId = useSelector((state) => state.user.user.id);
+  const [reservationMessage, setReservationMessage] = useState(null);
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    if (!userId) {
+      navigate("/login");
+    }
+  }, [userId, navigate]);
+
+  const validateForm = () => {
+    let valid = true;
+    if (!bookingDate) {
+      setDateError("Booking date is required");
+      valid = false;
+    } else {
+      setDateError("");
+    }
+    if (!desiredCity) {
+      setCityError("Desired city is required");
+      valid = false;
+    } else {
+      setCityError("");
+    }
+    return valid;
+  };
+
+  // eslint-disable-next-line
   const { state } = useLocation();
   const data = state.car;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    sessionStorage.setItem("id", data.id);
+
+    const isValid = validateForm();
+    if (isValid) {
+      const reservationData = {
+        reservation: {
+          user_id: userId,
+          car_id: data.id,
+          date: bookingDate,
+          city: desiredCity,
+        },
+      };
+      dispatch(reserveCar(reservationData)).then((resultAction) => {
+        if (reserveCar.fulfilled.match(resultAction)) {
+          setReservationMessage("Reservation successful!");
+          setBookingDate("");
+          setDesiredCity("");
+        } else if (reserveCar.rejected.match(resultAction)) {
+          setReservationMessage("Reservation failed. Please try again.");
+        }
+      });
+
+      setTimeout(() => {
+        navigate("/reserved");
+      }, 1000);
+    }
   };
 
   return (
     <MainLayout>
-      <div className='relative h-screen'>
+      <div className='relative h-screen -mt-20'>
         <div className='absolute inset-0 flex items-center justify-center'>
           <img
             className='absolute inset-0 object-fit-cover w-full h-full'
@@ -53,6 +109,7 @@ const Reserve = () => {
                   onChange={(e) => setBookingDate(e.target.value)}
                   className='w-full p-2 border rounded focus:outline-none focus:border-blue-500'
                 />
+                {dateError && <p className='text-red-500'>{dateError}</p>}
               </div>
               <div className='mb-4'>
                 <label
@@ -70,6 +127,7 @@ const Reserve = () => {
                   className='w-full p-2 border rounded focus:outline-none focus:border-blue-500'
                   placeholder='Enter Desired City'
                 />
+                {cityError && <p className='text-red-500'>{cityError}</p>}
               </div>
               <div className='text-center'>
                 <button
@@ -79,6 +137,15 @@ const Reserve = () => {
                   RESERVE NOW
                 </button>
               </div>
+              {reservationMessage && (
+                <div
+                  className={`mt-8 text-center text-${
+                    reservationMessage.includes("successful") ? "green" : "red"
+                  }-500`}
+                >
+                  {reservationMessage}
+                </div>
+              )}
             </form>
           </div>
         </div>
