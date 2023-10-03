@@ -10,7 +10,7 @@ const Header = () => {
     dispatch(logoutUser());
   };
   return (
-    <div className='flex justify-end p-4'>
+    <div className='flex justify-end p-4 bg-transparent z-50 absolute top-0 right-0'>
       {user ? (
         <button
           type='button'
