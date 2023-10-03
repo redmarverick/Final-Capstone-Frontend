@@ -60,7 +60,7 @@ const ReservedCars = () => {
   ];
 
   return (
-    <MainLayout className='reserved-cars'>
+    <MainLayout>
       <h1 className='text-3xl uppercase text-gray-800 tracking-wider font-bold text-center mt-6 md:text-5xl md:tracking-widest md:mt-12'>
         Reserved Cars
       </h1>

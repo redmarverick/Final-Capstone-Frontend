@@ -1,20 +1,16 @@
 import { NavLink } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../../redux/users/userSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
-  // const user = useSelector((state) => state.user.user);
-  const user = {
-    email: "asd@asd",
-    password: "asd",
-  };
+  const user = useSelector((state) => state.user.user);
 
   const handleLogout = () => {
     dispatch(logoutUser());
   };
   return (
-    <div className='flex justify-end p-4'>
+    <div className='flex justify-end p-4 bg-transparent z-50 absolute top-0 right-0'>
       {user ? (
         <button
           type='button'

@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../redux/users/userSlice";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const loginStatus = useSelector((state) => state.user.status);
   const loginError = useSelector((state) => state.user.error);
 
@@ -12,6 +14,8 @@ const LoginForm = () => {
     password: "",
   });
 
+  const [errorMessageVisible, setErrorMessageVisible] = useState(false);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUserData({ ...userData, [name]: value });
@@ -19,7 +23,16 @@ const LoginForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(loginUser(userData)); // Dispatch the loginUser action with user data
+    dispatch(loginUser(userData)).then((result) => {
+      if (result.payload) {
+        navigate("/cars");
+      } else {
+        setErrorMessageVisible(true);
+        setTimeout(() => {
+          setErrorMessageVisible(false);
+        }, 3000);
+      }
+    });
   };
 
   return (
@@ -53,10 +66,10 @@ const LoginForm = () => {
       >
         {loginStatus === "loading" ? "Logging In..." : "LOGIN"}
       </button>
-      {loginStatus === "succeeded" && (
-        <p className='text-white'>Login successful!</p>
+      {errorMessageVisible && loginError && (
+        <p className='text-red-500'>{loginError}</p>
       )}
-      {loginError && <p className='text-white'>{loginError}</p>}
+
       <p className='text-white'>
         {/* eslint-disable-next-line  */}
         Do not have an account?{" "}

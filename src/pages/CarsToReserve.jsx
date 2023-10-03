@@ -13,35 +13,42 @@ const CarsToReserve = () => {
     dispatch(fetchAllCars());
   }, [dispatch]);
 
-  if (!cars || carsToReserve.status === "loading") {
-    return <div>Loading...</div>;
-  }
-
-  if (carsToReserve.status === "failed") {
-    return <div>Error: An error occurred while fetching data.</div>;
-  }
-
   return (
     <MainLayout>
-      <h1>Choose car you wsih to reserve.</h1>
-      <div className="grid grid-cols-4 gap-2">
-        {cars.map((car) => (
-          <div key={car.id} className="bg-white p-4 rounded-lg shadow">
-            <img
-              src={car.photo}
-              alt={car.name}
-              className="w-full h-48 object-cover"
-            />
-            <h2 className="text-xl mt-2">{car.name}</h2>
-            <Link
-              to={`/cars/details/${car.id}`}
-              className="text-blue-500 mt-2 block"
-            >
-              View Details
-            </Link>
+      {carsToReserve.status === "loading" && <div>Loading...</div>}
+      {carsToReserve.status === "failed" && (
+        <div className='text-red-500 font-bold text-center mt-4'>
+          Error: An error occurred while fetching data.
+        </div>
+      )}
+      {carsToReserve.status === "succeeded" && (
+        <>
+          <h1 className='-mt-10 text-3xl uppercase text-gray-800 tracking-wider font-bold text-center md:text-5xl md:tracking-widest md:mt-12'>
+            Reserve a Ride
+          </h1>
+          <h4 className='text-sm text-gray-700 font-ibm font-light text-center mt-2 md:text-xl md:tracking-widest md:mt-4'>
+            Select a car to reserve
+          </h4>
+          <div className='p-4 md:p-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2'>
+            {cars.map((car) => (
+              <div key={car.id} className='bg-white p-4 rounded-lg shadow'>
+                <img
+                  src={car.photo}
+                  alt={car.name}
+                  className='w-full h-48 object-cover'
+                />
+                <h2 className='text-xl mt-2'>{car.name}</h2>
+                <Link
+                  to={`/cars/details/${car.id}`}
+                  className='text-blue-500 mt-2 block'
+                >
+                  View Details
+                </Link>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </>
+      )}
     </MainLayout>
   );
 };
