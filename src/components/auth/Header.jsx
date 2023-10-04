@@ -1,16 +1,22 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../../redux/users/userSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
+  const location = useLocation();
+  const isOnNewReservationPage = location.pathname === "/new-reservation";
 
   const handleLogout = () => {
     dispatch(logoutUser());
   };
+
+  if (isOnNewReservationPage) {
+    return null;
+  }
   return (
-    <div className='flex justify-end p-4 bg-transparent z-50 absolute top-0 right-0'>
+    <div className='flex justify-end p-4 bg-transparent z-10 absolute top-0 right-0'>
       {user ? (
         <button
           type='button'

@@ -32,7 +32,7 @@ export const registerUser = createAsyncThunk(
     } catch (error) {
       throw new Error(error.message);
     }
-  },
+  }
 );
 
 // Define an async thunk for user login
@@ -59,7 +59,7 @@ export const loginUser = createAsyncThunk(
     } catch (error) {
       throw new Error(error.message);
     }
-  },
+  }
 );
 
 export const logoutUser = createAsyncThunk("user/logoutUser", async () => {
@@ -109,7 +109,8 @@ const userSlice = createSlice({
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.user = action.payload;
+        state.user = action.payload.user;
+        localStorage.setItem("user", JSON.stringify(state.user));
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.status = "failed";
@@ -117,6 +118,7 @@ const userSlice = createSlice({
       })
       .addCase(logoutUser.fulfilled, (state) => {
         state.user = null;
+        localStorage.removeItem("user");
       });
   },
 });

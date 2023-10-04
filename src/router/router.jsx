@@ -10,6 +10,7 @@ import HomePage from "../pages/HomePage";
 import CarsToReserve from "../pages/CarsToReserve";
 import AddCarForm from "../pages/AddCarForm";
 import DeleteCar from "../pages/DeleteCar";
+import PrivateRoute from "./privateRoute";
 
 const router = createBrowserRouter([
   {
@@ -30,11 +31,19 @@ const router = createBrowserRouter([
   },
   {
     path: "/new-reservation",
-    element: <Reserve />,
+    element: (
+      <PrivateRoute>
+        <Reserve />
+      </PrivateRoute>
+    ),
   },
   {
     path: "/reserved",
-    element: <ReservedCars />,
+    element: (
+      <PrivateRoute>
+        <ReservedCars />
+      </PrivateRoute>
+    ),
   },
   {
     path: "cars/details/:id",

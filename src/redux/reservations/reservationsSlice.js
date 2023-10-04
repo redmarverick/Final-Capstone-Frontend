@@ -1,37 +1,48 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import types from '../types';
+import types from "../types";
 
 // base url of the api for managing car reservations
-const url = 'http://localhost:3000/api/reservations';
+const url = "http://localhost:3000/reservations";
 
 export const reserveCar = createAsyncThunk(types.RESERVE_CAR, async (car) => {
   const response = await axios.post(url, car);
-  if (response.status === 200 && response.statusText === 'OK') {
+  if (response.status === 200 && response.statusText === "OK") {
     return response.data;
   }
   return null;
 });
 
-export const fetchAllReservations = createAsyncThunk(types.FETCH_RESERVATIONS, async () => {
-  const user = JSON.parse(localStorage.getItem('user'));
-  const response = await axios.get(url, {
-    params: {
-      user_id: user.id,
-    },
-  });
-  return response.data;
-});
+export const fetchAllReservations = createAsyncThunk(
+  types.FETCH_RESERVATIONS,
+  async (_, { getState }) => {
+    // eslint-disable-next-line
+    const user = getState().user.user;
+    // eslint-disable-next-line
+    try {
+      const response = await axios.get(url, {
+        params: {
+          user_id: user.id,
+        },
+      });
+
+      return response.data;
+    } catch (error) {
+      // Manejar errores aquí si es necesario
+      throw error;
+    }
+  }
+);
 
 // initial state for the redux slice
 const initialState = {
   reservations: [],
   error: null,
-  status: 'idle',
+  status: "idle",
 };
 
 const reservationsSlice = createSlice({
-  name: 'reservations',
+  name: "reservations",
   initialState,
   reducers: {
     reservations(state, action) {
@@ -42,14 +53,14 @@ const reservationsSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchAllReservations.pending, (state) => {
-        state.status = 'loading';
+        state.status = "loading";
       })
       .addCase(fetchAllReservations.fulfilled, (state, action) => {
-        state.status = 'succeeded';
+        state.status = "succeeded";
         state.reservations = action.payload;
       })
       .addCase(fetchAllReservations.rejected, (state, action) => {
-        state.status = 'rejected';
+        state.status = "rejected";
         state.error = action.error.message;
       });
   },
