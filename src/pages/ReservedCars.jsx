@@ -7,7 +7,6 @@ import Car from "../components/reserved/Car";
 const ReservedCars = () => {
   const dispatch = useDispatch();
   const reservations = useSelector((state) => state.reservations.reservations);
-  console.log(reservations);
 
   useEffect(() => {
     dispatch(fetchAllReservations());
@@ -22,7 +21,7 @@ const ReservedCars = () => {
         Here you can see all your reservations
       </h4>
       <hr className='w-24 self-center m-4 border-t-black md:w-52 md:m-8' />
-      {reservations.length === 0 && (
+      {reservations.cars_reservations.length === 0 && (
         <h4 className='text-sm text-gray-700 font-ibm font-light text-center mt-2 md:text-xl md:tracking-widest md:mt-4'>
           No reservations yet
         </h4>
