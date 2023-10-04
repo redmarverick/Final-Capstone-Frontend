@@ -45,7 +45,16 @@ const Reserve = () => {
     e.preventDefault();
 
     const isValid = validateForm();
+
     if (isValid) {
+      const currentDate = new Date();
+      const selectedDate = new Date(bookingDate);
+
+      if (selectedDate < currentDate) {
+        setDateError("Booking date cannot be in the past");
+        return;
+      }
+
       const reservationData = {
         reservation: {
           user_id: userId,
@@ -54,6 +63,7 @@ const Reserve = () => {
           city: desiredCity,
         },
       };
+
       dispatch(reserveCar(reservationData)).then((resultAction) => {
         if (reserveCar.fulfilled.match(resultAction)) {
           setReservationMessage("Reservation successful!");
