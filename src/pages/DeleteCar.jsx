@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import MainLayout from "../layouts/MainLayout";
-import { fetchAllCars } from "../redux/cars/carsSlice";
+import { fetchAllCars, deleteCar } from "../redux/cars/carsSlice";
 
 const DeleteCar = () => {
   const dispatch = useDispatch();
@@ -20,8 +20,12 @@ const DeleteCar = () => {
     return <div>Error: An error occurred while fetching data.</div>;
   }
 
-  const handleDelete = () => {
-    console.log("delete");
+  const handleDelete = (id) => {
+    dispatch(deleteCar(id)).then((response) => {
+      if (response.payload) {
+        dispatch(fetchAllCars());
+      }
+    });
   };
 
   return (
@@ -36,11 +40,8 @@ const DeleteCar = () => {
               className="w-full h-48 object-cover"
             />
             <h2 className="text-xl mt-2">{car.name}</h2>
-            <button
-              type="button"
-              onClick={() => handleDelete()}
-            >
-              <img src='delete.svg' alt='delete' className='w-8 md:w-10' />
+            <button type="button" onClick={() => handleDelete(car.id)}>
+              <img src="delete.svg" alt="delete" className="w-8 md:w-10" />
             </button>
           </div>
         ))}

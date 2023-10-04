@@ -1,8 +1,12 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
+import { addCar } from "../redux/cars/carsSlice";
 
-const AddCarForm = ({ onAddCar }) => {
+const AddCarForm = () => {
+  const disptach = useDispatch();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -20,25 +24,19 @@ const AddCarForm = ({ onAddCar }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Check if all fields are filled
-    if (
-      formData.name
-      && formData.description
-      && formData.photo
-      && formData.price
-    ) {
-      // Call the onAddCar function to add the new car
-      onAddCar(formData);
-      // Clear the form fields
-      setFormData({
-        name: "",
-        description: "",
-        photo: "",
-        price: "",
-      });
-    } else {
-      alert("Please fill in all fields.");
-    }
+    disptach(addCar(formData)).then((response) => {
+      console.log(response);
+      if (response.payload) {
+        navigate("/cars");
+        // Clear the form fields
+        setFormData({
+          name: "",
+          description: "",
+          photo: "",
+          price: "",
+        });
+      }
+    });
   };
 
   return (
@@ -57,6 +55,7 @@ const AddCarForm = ({ onAddCar }) => {
             </label>
             <input
               type="text"
+              required
               id="name"
               name="name"
               value={formData.name}
@@ -76,6 +75,7 @@ const AddCarForm = ({ onAddCar }) => {
               id="description"
               name="description"
               value={formData.description}
+              required
               onChange={handleChange}
               placeholder="Car Description"
               rows="4"
@@ -93,6 +93,7 @@ const AddCarForm = ({ onAddCar }) => {
               type="text"
               id="photo"
               name="photo"
+              required
               value={formData.photo}
               onChange={handleChange}
               placeholder="Image URL"
@@ -110,6 +111,7 @@ const AddCarForm = ({ onAddCar }) => {
               type="number"
               id="price"
               name="price"
+              required
               value={formData.price}
               onChange={handleChange}
               placeholder="Car Price"
@@ -128,10 +130,6 @@ const AddCarForm = ({ onAddCar }) => {
       </div>
     </MainLayout>
   );
-};
-
-AddCarForm.propTypes = {
-  onAddCar: PropTypes.func.isRequired, // Validate the onAddCar prop as a function
 };
 
 export default AddCarForm;

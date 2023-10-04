@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import types from "../types";
 
-const url = "http://localhost:3000/reservations";
+const url = "https://car-booking-app-zg9h.onrender.com/reservations";
 
 export const reserveCar = createAsyncThunk(types.RESERVE_CAR, async (car) => {
   const response = await axios.post(url, car);
