@@ -11,6 +11,7 @@ import CarsToReserve from "../pages/CarsToReserve";
 import AddCarForm from "../pages/AddCarForm";
 import DeleteCar from "../pages/DeleteCar";
 import PrivateRoute from "./privateRoute";
+import AuthGuard from "./authGuard";
 
 const router = createBrowserRouter([
   {
@@ -23,11 +24,19 @@ const router = createBrowserRouter([
   },
   {
     path: "/login",
-    element: <Login />,
+    element: (
+      <AuthGuard>
+        <Login />
+      </AuthGuard>
+    ),
   },
   {
     path: "/signup",
-    element: <SignUp />,
+    element: (
+      <AuthGuard>
+        <SignUp />
+      </AuthGuard>
+    ),
   },
   {
     path: "/new-reservation",

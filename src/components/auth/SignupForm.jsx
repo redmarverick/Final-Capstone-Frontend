@@ -14,8 +14,10 @@ const SignupForm = () => {
     password_confirmation: "",
   });
 
+  const [successMessageVisible, setSuccessMessageVisible] = useState(false);
+  const [errorMessageVisible, setErrorMessageVisible] = useState(false);
   // eslint-disable-next-line
-  const [error, setError] = useState("");
+  const [fieldCompletionError, setFieldCompletionError] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,26 +27,43 @@ const SignupForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (userData.password !== userData.password_confirmation) {
-      setError("Passwords do not match");
+      setErrorMessageVisible(true);
+      setSuccessMessageVisible(false);
+      setFieldCompletionError(false);
     } else if (
-      // eslint-disable-next-line
-      userData.email === "" ||
-      // eslint-disable-next-line
-      userData.password === "" ||
-      // eslint-disable-next-line
-      userData.password_confirmation === "" ||
-      userData.name === ""
+      userData.email === ""
+      || userData.password === ""
+      || userData.password_confirmation === ""
+      || userData.name === ""
     ) {
-      setError("Please fill all the fields");
+      setErrorMessageVisible(false);
+      setSuccessMessageVisible(false);
+      setFieldCompletionError(true);
     } else {
       // Dispatch the registerUser action
-      dispatch(registerUser(userData));
+      dispatch(registerUser(userData)).then((result) => {
+        if (result.payload) {
+          setSuccessMessageVisible(true);
+          setErrorMessageVisible(false);
+          setFieldCompletionError(false);
+          setTimeout(() => {
+            setSuccessMessageVisible(false);
+          }, 3000);
+        } else {
+          setErrorMessageVisible(true);
+          setSuccessMessageVisible(false);
+          setFieldCompletionError(false);
+          setTimeout(() => {
+            setErrorMessageVisible(false);
+          }, 3000);
+        }
+      });
     }
   };
 
   return (
     <form
-      className='p-4 sm:p-20 sm:px-32 max-w-xl bg-black flex flex-col items-center gap-2 bg-opacity-50 rounded-lg'
+      className='p-8 sm:p-20 sm:px-32 max-w-xl bg-black flex flex-col items-center gap-2 bg-opacity-50 rounded-lg'
       onSubmit={handleSubmit}
     >
       <h1 className='text-4xl text-white font-ubuntu mb-8'>Sign Up</h1>
@@ -92,13 +111,18 @@ const SignupForm = () => {
       >
         {registrationStatus === "loading" ? "Signing Up..." : "SIGN UP"}
       </button>
-      {registrationStatus === "succeeded" && (
-        <h2 className='w-full h-full flex justify-center items-center bg-white rounded-full'>
+      {fieldCompletionError && (
+        <h2 className='w-full h-full flex text-white justify-center items-center bg-red-400 rounded-full'>
+          Please fill all the fields.
+        </h2>
+      )}
+      {successMessageVisible && (
+        <h2 className='w-full h-full flex text-white justify-center items-center bg-[#97BF0F] rounded-full'>
           Registration successful!
         </h2>
       )}
-      {registrationError && (
-        <h2 className='w-full h-full flex justify-center items-center bg-red-400 rounded-full'>
+      {errorMessageVisible && (
+        <h2 className='w-full h-full flex text-white justify-center items-center bg-red-400 rounded-full'>
           {registrationError}
         </h2>
       )}
