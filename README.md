@@ -31,7 +31,7 @@
 # 📖 Final-Capstone-Project <a name="about-project"></a>
 
 **Final-Capstone-Project** is a car booking website that allows users to easily book a ride and travel to their desired destinations. User can reserve a car from the available cars by providing the date and city.
-Fast-Lane-Racer provides a seamless and reliable car booking experience.
+Final-Capstone-Project provides a seamless and reliable car booking experience.
 
 **Link for the Backend repository:** [URL](https://github.com/redmarverick/Final-Capstone-Backend)
 
