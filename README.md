@@ -1,13 +1,13 @@
 <div align="center">
 
-  <h2><b>Final-Capstone-Project</b><br><small>A Car Booking Website</small></h2>
+  <h2><b>CAR BOOKING APP</b><br><small>A Car Booking Website</small></h2>
 
 </div>
 
 # 📗 Table of Contents
 
 - [📗 Table of Contents](#-table-of-contents)
-- [📖 Fast-Lane-Racer ](#-Fast-Lane-Racer-)
+- [📖 CAR BOOKING APP ](#-CAR BOOKING APP-)
   - [🛠 Built With ](#-built-with-)
     - [Tech Stack ](#tech-stack-)
     - [Key Features ](#key-features-)
