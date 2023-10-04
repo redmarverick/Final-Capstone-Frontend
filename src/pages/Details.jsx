@@ -57,19 +57,23 @@ const Details = () => {
           <ul className='flex flex-col'>
             <li className='flex justify-between p-3 bg-gray-200'>
               <span className='text-sm font-light'>Price</span>
-              <span className='text-sm font-light'>{`$${price}`}</span>
+              <span className=' font-semibold'>{`$${price}`}</span>
             </li>
             <li className='flex justify-between p-3 bg-gray-50'>
-              <span className='text-sm font-light'>Color</span>
-              <span className='text-sm font-light'>Black</span>
+              <span className='text-sm font-light'>Free Service</span>
+              <span className='text-sm font-semibold'>
+                1 year / 12,000 miles
+              </span>
             </li>
             <li className='flex justify-between p-3 bg-gray-200'>
               <span className='text-sm font-light'>Delivery</span>
-              <span className='text-sm font-light'>Free</span>
+              <span className='text-sm font-semibold'>2-4 weeks</span>
             </li>
             <li className='flex justify-between p-3 bg-gray-50'>
               <span className='text-sm font-light'>Warranty</span>
-              <span className='text-sm font-light'>1 year</span>
+              <span className='text-sm font-semibold'>
+                3 years / 36,000 miles
+              </span>
             </li>
           </ul>
           <p className='description mt-4 text-left text-sm font-light md:text-base'>

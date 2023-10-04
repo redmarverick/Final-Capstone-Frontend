@@ -6,7 +6,7 @@ import logo from "../assets/images/logo.png";
 const AuthLayout = ({ children }) => (
   <div className='min-h-screen max-h-screen flex flex-col overflow-hidden relative bg-amber-500'>
     {/* Header */}
-    <header className='z-50 py-4 md:px-10 flex justify-between items-center'>
+    <header className='z-50 p-4  md:px-10 flex justify-between items-center'>
       {/* Logo (Top Left) */}
       <NavLink
         to='/cars'
