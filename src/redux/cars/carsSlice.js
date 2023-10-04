@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import types from "../types";
 
-const url = "http://localhost:3000/cars";
+const url = "https://car-booking-app-zg9h.onrender.com/cars";
 
 export const fetchAllCars = createAsyncThunk(types.FETCH_CARS, async () => {
   const response = await axios.get(url);
@@ -20,7 +20,7 @@ export const fetchCarById = createAsyncThunk(
 export const addCar = createAsyncThunk("cars/addCar", async (formData) => {
   try {
     const response = await axios.post(
-      "http://127.0.0.1:3000/new-car",
+      "https://car-booking-app-zg9h.onrender.com/new-car",
       formData
     );
     return response.data;
@@ -31,7 +31,9 @@ export const addCar = createAsyncThunk("cars/addCar", async (formData) => {
 
 export const deleteCar = createAsyncThunk("cars/deleteCar", async (id) => {
   try {
-    const response = await axios.delete(`http://127.0.0.1:3000/cars/${id}`);
+    const response = await axios.delete(
+      `https://car-booking-app-zg9h.onrender.com/cars/${id}`
+    );
     return response.data;
   } catch (error) {
     throw error.response.data; // Throw the API error response

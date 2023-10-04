@@ -15,13 +15,16 @@ export const registerUser = createAsyncThunk(
     try {
       const formData = objectToFormData(userData);
 
-      const response = await fetch("http://localhost:3000/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: formData,
-      });
+      const response = await fetch(
+        "https://car-booking-app-zg9h.onrender.com/signup",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: formData,
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Registration failed"); // Adjust this error message as needed
@@ -42,13 +45,16 @@ export const loginUser = createAsyncThunk(
     try {
       const formData = objectToFormData(credentials);
 
-      const response = await fetch("http://localhost:3000/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: formData,
-      });
+      const response = await fetch(
+        "https://car-booking-app-zg9h.onrender.com/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: formData,
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Login failed, please check your credentials");
@@ -64,7 +70,7 @@ export const loginUser = createAsyncThunk(
 
 export const logoutUser = createAsyncThunk("user/logoutUser", async () => {
   try {
-    const response = await fetch("http://localhost:3000/logout", {
+    const response = await fetch("https://car-booking-app-zg9h.onrender.com/logout", {
       method: "DELETE",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",

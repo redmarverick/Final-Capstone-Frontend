@@ -17,8 +17,8 @@ const Menu = () => {
         <MenuLink to="/cars">VEHICLES</MenuLink>
         <MenuLink to="/car-to-reserve">RESERVE</MenuLink>
         <MenuLink to="/reserved">MY RESERVATIONS</MenuLink>
-        {user.admin ? <MenuLink to="/new-car">ADD CAR</MenuLink> : null}
-        {user.admin ? <MenuLink to="/delete-car">REMOVE CAR</MenuLink> : null}
+        {user ? <MenuLink to="/new-car">ADD CAR</MenuLink> : null}
+        {user ? <MenuLink to="/delete-car">REMOVE CAR</MenuLink> : null}
       </ul>
     </aside>
   );
