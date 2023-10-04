@@ -24,7 +24,7 @@ const CarsToReserve = () => {
       {carsToReserve.status === "succeeded" && (
         <>
           <h1 className=' text-3xl uppercase text-gray-800 tracking-wider font-bold text-center md:text-5xl md:tracking-widest md:mt-12'>
-            Reserve a Ride
+            Reserve a Test Drive
           </h1>
           <h4 className='text-sm text-gray-700 font-ibm font-light text-center mt-2 md:text-xl md:tracking-widest md:mt-4'>
             Select a car to reserve
