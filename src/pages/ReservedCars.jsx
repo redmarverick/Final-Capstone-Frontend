@@ -21,10 +21,12 @@ const ReservedCars = () => {
         Here you can see all your reservations
       </h4>
       <hr className='w-24 self-center m-4 border-t-black md:w-52 md:m-8' />
-      {reservations.cars_reservations.length === 0 && (
-        <h4 className='text-sm text-gray-700 font-ibm font-light text-center mt-2 md:text-xl md:tracking-widest md:mt-4'>
-          No reservations yet
-        </h4>
+      {reservations
+        && reservations.cars_reservations
+        && reservations.cars_reservations.length === 0 && (
+          <h4 className='text-sm text-gray-700 font-ibm font-light text-center mt-2 md:text-xl md:tracking-widest md:mt-4'>
+            No reservations yet
+          </h4>
       )}
       <div className='max-w-min w-[100%] self-center'>
         <div className='cars-container m-2 flex flex-col gap-4 md:mt-8'>
