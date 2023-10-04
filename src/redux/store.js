@@ -1,11 +1,11 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import reservationReducer from "./reservations/reservationsSlice";
 import carsReducer from "./cars/carsSlice";
 import userSlice from "./users/userSlice";
+import reservationsSlice from "./reservations/reservationsSlice";
 
 const rootReducer = combineReducers({
   cars: carsReducer,
-  reservations: reservationReducer,
+  reservations: reservationsSlice,
   user: userSlice,
 });
 
