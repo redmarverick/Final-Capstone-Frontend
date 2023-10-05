@@ -1,10 +1,11 @@
-import { useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { useState, React } from "react";
+import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux"; // Import useSelector from react-redux
 import logo from "../../assets/images/logo.png";
 
 const MobileMenu = () => {
+  const user = useSelector((state) => state.user.user);
   const [showMenu, setShowMenu] = useState(false);
-  const location = useLocation();
 
   return (
     <div className="mobile-menu lg:hidden z-50">
@@ -46,17 +47,19 @@ const MobileMenu = () => {
                 NEW RESERVATION
               </li>
             </NavLink>
-            <NavLink to="/new-car">
-              <li className="cursor-pointer py-4 text-xl font-semibold">
-                ADD CAR
-              </li>
-            </NavLink>
-            {location.pathname.match("/cars") && (
-              <NavLink to="/delete-car">
-                <li className="cursor-pointer py-4 text-xl font-semibold">
-                  <button type="button">DELETE CAR</button>
-                </li>
-              </NavLink>
+            {user && user.role === "admin" && (
+              <>
+                <NavLink to="/new-car">
+                  <li className="cursor-pointer py-4 text-xl font-semibold">
+                    ADD CAR
+                  </li>
+                </NavLink>
+                <NavLink to="/delete-car">
+                  <li className="cursor-pointer py-4 text-xl font-semibold">
+                    <button type="button">DELETE CAR</button>
+                  </li>
+                </NavLink>
+              </>
             )}
           </ul>
         </div>

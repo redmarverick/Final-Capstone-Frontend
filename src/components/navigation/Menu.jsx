@@ -11,7 +11,7 @@ import youtube from "../../assets/images/youtube.svg";
 
 const Menu = () => {
   const user = useSelector((state) => state.user.user);
-
+  console.log(user);
   return (
     <aside className="fixed top-0 bottom-0 text-left navigation hidden border-r border-gray-300 float-left pb-8 w-[250px] bg-slate-100 h-screen lg:block">
       <NavLink to="/" className="flex items-center justify-center">
@@ -21,8 +21,12 @@ const Menu = () => {
         <MenuLink to="/cars">VEHICLES</MenuLink>
         <MenuLink to="/car-to-reserve">RESERVE</MenuLink>
         <MenuLink to="/reserved">MY RESERVATIONS</MenuLink>
-        {user ? <MenuLink to="/new-car">ADD CAR</MenuLink> : null}
-        {user ? <MenuLink to="/delete-car">REMOVE CAR</MenuLink> : null}
+        {user && user.role === "admin" ? (
+          <MenuLink to="/new-car">ADD CAR</MenuLink>
+        ) : null}
+        {user && user.role === "admin" ? (
+          <MenuLink to="/delete-car">REMOVE CAR</MenuLink>
+        ) : null}
       </ul>
       <div className="flex items-center justify-center mt-8 gap-2">
         <a
