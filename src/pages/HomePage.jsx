@@ -22,7 +22,7 @@ const HomePage = () => (
           to='/signup'
           className='z-50 bg-white text-amber-700 px-4 py-2 rounded-full hover:bg-amber-700 hover:text-white cursor-pointer'
         >
-          Sing Up
+          Sign Up
         </NavLink>
       </div>
     </header>
