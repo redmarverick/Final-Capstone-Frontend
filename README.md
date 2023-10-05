@@ -7,7 +7,7 @@
 # 📗 Table of Contents
 
 - [📗 Table of Contents](#-table-of-contents)
-- [📖 CAR BOOKING APP ](#-CAR BOOKING APP-)
+- [📖 CAR BOOKING APP ](#-about-project)
   - [🛠 Built With ](#-built-with-)
     - [Tech Stack ](#tech-stack-)
     - [Key Features ](#key-features-)
@@ -72,7 +72,6 @@ The final number of team members are 3. View the details of team members [here](
 
 ### Key Features <a name="key-features"></a>
 
-- Only Admin can add or delete Cars from the website.
 - Users can create accounts and log in securely to access the booking functionalities.
 - Choose from a wide range of available cars based on your preferences and requirements.
 - Easily book a car for your desired date and time and manage your bookings efficiently.
@@ -85,7 +84,7 @@ The final number of team members are 3. View the details of team members [here](
 
 ## <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/539px-React-icon.svg.png" width="23" height="20"/> React Frontend <a name="react-frontend"></a>
 
-- Backend part of the project [Final-Capstone-Frontend](https://github.com/redmarverick/Final-Capstone-Frontend)
+- Backend part of the project [Final-Capstone-Backend](https://github.com/redmarverick/Final-Capstone-Backend)
 
 ## 🚀 Live Demo <a name="live-demo"></a>
 
