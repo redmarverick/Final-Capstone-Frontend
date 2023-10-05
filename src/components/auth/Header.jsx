@@ -9,6 +9,7 @@ const Header = () => {
   const isOnNewReservationPage = location.pathname === "/new-reservation";
 
   const handleLogout = () => {
+    localStorage.removeItem("user");
     dispatch(logoutUser());
   };
 
